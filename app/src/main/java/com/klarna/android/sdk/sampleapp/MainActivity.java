@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.klarna.checkout.sdk.KlarnaCheckout;
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
         mStatusText = (TextView)findViewById(R.id.status_text);
         mWebView = (WebView)findViewById(R.id.web_view);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
 
         mKlarnaCheckout = new KlarnaCheckout(this, mWebView);
 //        mKlarnaCheckout.attachToActivity(this);
