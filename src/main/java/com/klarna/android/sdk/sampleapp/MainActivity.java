@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mStatusText;
     private WebView mWebView;
     public static final String EVENT_COMPLETE = "complete";
-
     private KlarnaCheckout mKlarnaCheckout;
 
     @Override
@@ -33,25 +32,22 @@ public class MainActivity extends AppCompatActivity {
 
         mStatusText = (TextView)findViewById(R.id.status_text);
         mWebView = (WebView)findViewById(R.id.web_view);
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
-        });
+        mWebView.setWebViewClient(getNonRedirectingWebViewClient());
 
         mKlarnaCheckout = new KlarnaCheckout(this, mWebView);
+
 
         mKlarnaCheckout.setSignalListener(new SignalListener() {
             private static final String TAG = "SignalListener";
 
             @Override
-            public void onSignal(String eventName, JSONArray data) {
-
+            public void onSignal(String eventName, JSONArray jsonArray) {
+                Log.d(TAG, "Got a signal: " + eventName + ", with params: " + (jsonArray!=null ? jsonArray.toString() : null));
+                mStatusText.setText(eventName);
                 if (eventName.equals(EVENT_COMPLETE)) {
                     try {
 
-                        String url = data.getJSONObject(0).getString("uri");
+                        String url = jsonArray.getJSONObject(0).getString("uri");
                         mKlarnaCheckout.getWebView().loadUrl(url);
 
                     } catch (JSONException e) {
@@ -63,6 +59,21 @@ public class MainActivity extends AppCompatActivity {
 
         mWebView.loadUrl("https://www.klarnacheckout.com/");
     }
+
+    /**
+     * As the Klarna demo site has redirects we turn this off to prevent external browser taking over.
+     *
+     * @return
+     */
+    private WebViewClient getNonRedirectingWebViewClient() {
+        return new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        };
+    }
+
 
     @Override
     protected void onDestroy() {
