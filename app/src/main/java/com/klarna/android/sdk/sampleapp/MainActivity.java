@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mStatusText = (TextView)findViewById(R.id.status_text);
-        mWebView = (WebView)findViewById(R.id.web_view);
+        mStatusText = (TextView) findViewById(R.id.status_text);
+        mWebView = (WebView) findViewById(R.id.web_view);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -40,20 +40,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //Attach Activity and WebView to checkout
         mKlarnaCheckout = new KlarnaCheckout(this, mWebView);
 
+        //Attach the listener to handle event messages from checkout.
         mKlarnaCheckout.setSignalListener(new SignalListener() {
             private static final String TAG = "SignalListener";
 
             @Override
             public void onSignal(String eventName, JSONArray data) {
-
                 if (eventName.equals(EVENT_COMPLETE)) {
                     try {
-
                         String url = data.getJSONObject(0).getString("uri");
                         mKlarnaCheckout.getWebView().loadUrl(url);
-
                     } catch (JSONException e) {
                         Log.e(TAG, e.getMessage(), e);
                     }
@@ -61,12 +61,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Load the page containing the Klarna Checkout.
         mWebView.loadUrl("https://www.klarnacheckout.com/");
     }
 
     @Override
     protected void onDestroy() {
-        if (mKlarnaCheckout!=null) {
+        if (mKlarnaCheckout != null) {
             mKlarnaCheckout.destroy();
         }
         super.onDestroy();

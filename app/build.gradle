@@ -31,5 +31,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
 
-    compile (name: 'klarna-checkout-sdk-0.1-beta6-release', ext: 'aar')
+    compile (name: 'klarna-checkout-sdk-0.1-beta7-release', ext: 'aar')
 }
