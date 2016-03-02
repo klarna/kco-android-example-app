@@ -15,9 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "Main";
-
-    private TextView mStatusText;
     private WebView mWebView;
     public static final String EVENT_COMPLETE = "complete";
 
@@ -31,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mStatusText = (TextView) findViewById(R.id.status_text);
         mWebView = (WebView) findViewById(R.id.web_view);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
@@ -39,8 +35,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        mWebView.getSettings().setJavaScriptEnabled(true);
 
+        this.initKlarnaCheckout();
 
+        //Load the page containing the Klarna Checkout.
+        mWebView.loadUrl("https://www.klarnacheckout.com/");
+    }
+
+    protected void initKlarnaCheckout() {
         //Attach Activity and WebView to checkout
         mKlarnaCheckout = new KlarnaCheckout(this, mWebView);
 
@@ -60,9 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        //Load the page containing the Klarna Checkout.
-        mWebView.loadUrl("https://www.klarnacheckout.com/");
     }
 
     @Override
