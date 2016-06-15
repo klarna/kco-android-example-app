@@ -6,18 +6,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
-import com.klarna.checkout.sdk.KlarnaCheckout;
-import com.klarna.checkout.sdk.SignalListener;
+import com.klarna.checkout.KlarnaCheckout;
+import com.klarna.checkout.SignalListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
-    public static final String EVENT_COMPLETE = "complete";
-
     private KlarnaCheckout mKlarnaCheckout;
 
     @Override
@@ -45,20 +42,19 @@ public class MainActivity extends AppCompatActivity {
 
     protected void initKlarnaCheckout() {
         //Attach Activity and WebView to checkout
-        mKlarnaCheckout = new KlarnaCheckout(this, mWebView);
+        mKlarnaCheckout = new KlarnaCheckout(this);
+        mKlarnaCheckout.setWebView(mWebView);
 
         //Attach the listener to handle event messages from checkout.
         mKlarnaCheckout.setSignalListener(new SignalListener() {
-            private static final String TAG = "SignalListener";
-
             @Override
-            public void onSignal(String eventName, JSONArray data) {
-                if (eventName.equals(EVENT_COMPLETE)) {
+            public void onSignal(String eventName, JSONObject jsonObject) {
+                if (eventName.equals("complete")) {
                     try {
-                        String url = data.getJSONObject(0).getString("uri");
-                        mKlarnaCheckout.getWebView().loadUrl(url);
+                        String url = jsonObject.getString("uri");
+                        mWebView.loadUrl(url);
                     } catch (JSONException e) {
-                        Log.e(TAG, e.getMessage(), e);
+                        Log.e(e.getMessage(), e.toString());
                     }
                 }
             }
