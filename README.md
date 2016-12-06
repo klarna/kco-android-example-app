@@ -1,0 +1,1 @@
+See: https://github.com/klarna/kco-mobile-sdk/tree/master/android
