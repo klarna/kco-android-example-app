@@ -1,5 +1,6 @@
 package com.klarna.androidnative;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -77,13 +78,14 @@ public class MainActivity extends AppCompatActivity implements HandshakeListener
         webView.loadUrl("http://klarnacheckout.com/");
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private WebView setupWebView() {
         WebView webView = ((WebView) findViewById(R.id.webview));
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
+            WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
@@ -110,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements HandshakeListener
             }
         };
     }
-
-
 
     private void loadConfirmationSnippet(String url) {
         Log.e("MainActivity", "loadConfirmationSnippet: " + url);
