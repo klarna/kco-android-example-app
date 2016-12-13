@@ -93,12 +93,10 @@ public class MainActivity extends AppCompatActivity implements HandshakeListener
     @Override
     public void onHandshake(String snippet) {
         if (!mConfirmationSnippetLoading) {
-            /*
             Intent intent = new Intent(this, CheckoutActivity.class);
             intent.putExtra("snippet", snippet);
             startActivityForResult(intent, 100);
             mConfirmationSnippetLoading = false;
-            */
         }
     }
 

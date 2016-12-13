@@ -19,6 +19,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".CheckoutActivity"
+            android:label="@string/activity_checkout"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
     </application>
 
 </manifest>
