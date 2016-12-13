@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidNative</string>
+    <string name="app_name">Native</string>
     <string name="activity_checkout">Checkout</string>
     <string name="action_settings">Settings</string>
 </resources>
