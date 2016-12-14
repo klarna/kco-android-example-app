@@ -1,1 +1,1 @@
-include ':native', ':hybrid'
+include ':native', ':hybrid', ':nativeembedded'
