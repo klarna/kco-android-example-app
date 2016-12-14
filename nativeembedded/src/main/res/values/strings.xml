@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Embedded Native</string>
+    <string name="activity_checkout">Checkout</string>
+    <string name="header">Header</string>
+    <string name="footer">Footer</string>
+</resources>
