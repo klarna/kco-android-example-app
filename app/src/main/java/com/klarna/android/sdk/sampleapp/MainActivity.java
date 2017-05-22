@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void initKlarnaCheckout() {
         //Attach Activity and WebView to checkout
-        mKlarnaCheckout = new KlarnaCheckout(this);
+        mKlarnaCheckout = new KlarnaCheckout(this, "kco-android-example://checkout");
         mKlarnaCheckout.setWebView(mWebView);
 
         //Attach the listener to handle event messages from checkout.
