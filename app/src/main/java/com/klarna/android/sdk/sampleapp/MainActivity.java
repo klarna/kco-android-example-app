@@ -1,8 +1,9 @@
 package com.klarna.android.sdk.sampleapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,15 +18,16 @@ public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
     private KlarnaCheckout mKlarnaCheckout;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mWebView = (WebView) findViewById(R.id.web_view);
+        mWebView = findViewById(R.id.web_view);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         this.initKlarnaCheckout();
 
         //Load the page containing the Klarna Checkout.
-        mWebView.loadUrl("https://www.klarnacheckout.com/");
+        mWebView.loadUrl("https://www.klarna.com/demo/uk/kco/products/");
     }
 
     protected void initKlarnaCheckout() {
