@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
 
     defaultConfig {
         applicationId "com.klarna.android.sdk.sampleapp"
-        minSdkVersion 17
-        targetSdkVersion 23
-        versionCode 2
-        versionName "0.2"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 3
+        versionName "0.3"
     }
     buildTypes {
         release {
@@ -17,19 +17,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
     flatDir {
         dirs 'libs'
     }
+    maven {
+        url 'https://x.klarnacdn.net/mobile-sdk/'
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
-    compile (name: 'klarna-checkout', ext: 'aar')
+    implementation 'com.klarna.checkout:sdk:1.6.13'
 }
+
