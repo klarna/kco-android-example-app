@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         this.initKlarnaCheckout();
 
         //Load the page containing the Klarna Checkout.
-        mWebView.loadUrl("https://www.klarna.com/demo/uk/kco/products/");
+        mWebView.loadUrl("https://www.klarna.com/demo/");
     }
 
     protected void initKlarnaCheckout() {
